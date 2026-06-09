@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
-import { Truck, Package, MapPin, Headphones, Image, Videotape } from "lucide-react";
+import { Truck, Package, MapPin, Headphones, Image, Videotape, BellElectricIcon, FrameIcon } from "lucide-react";
 
 const features = [
   {
@@ -15,16 +15,24 @@ const features = [
   {
     title: "Picture Framing",
     description: "Turn your moments into timeless art with premium picture framing.",
-    icon: Package,
-    href: "/warehouse",
+    icon: FrameIcon,
+    href: "/coming-soon",
     color: "bg-orange-500/10 dark:bg-orange-500/20",
     iconColor: "text-orange-600 dark:text-orange-400",
   },
   {
-    title: "Videography",
+    title: "Media",
     description: "Capture your moments with our professional videography services",
     icon: Videotape,
-    href: "/support",
+    href: "/coming-soon",
+    color: "bg-purple-500/10 dark:bg-purple-500/20",
+    iconColor: "text-purple-600 dark:text-purple-400",
+  },
+  {
+    title: "Electrical",
+    description: "Capture your moments with our professional videography services",
+    icon: BellElectricIcon,
+    href: "/coming-soon",
     color: "bg-purple-500/10 dark:bg-purple-500/20",
     iconColor: "text-purple-600 dark:text-purple-400",
   },
@@ -50,7 +58,10 @@ export default function Landing() {
               Picture Framing
             </Link>
             <Link href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-track">
-              Videography
+              Media
+            </Link>
+            <Link href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-track">
+              Electrical
             </Link>
           </nav>
           
