@@ -81,7 +81,7 @@ export default function Landing() {
             </Link>
           </div>
 
-          <div className="hidden md:block md:w-1/2 md:pl-8">
+          <div className="py-4 md:py-0 md:block md:w-1/2 md:pl-8">
             <div className="w-full h-full flex items-center justify-center">
               <img src="/weekend-delivery-surprise.jpeg" alt="Hero illustration" className="w-full max-w-md h-auto rounded-lg shadow-lg" />
             </div>
@@ -134,7 +134,7 @@ export default function Landing() {
             </Link>
           </div>
 
-          <div className="hidden md:block md:w-1/2 md:pl-8">
+          <div className="py-4 md:py-0 md:block md:w-1/2 md:pl-8">
             <div className="w-full h-full flex items-center justify-center">
               <img src="/cac.jpeg" alt="Hero illustration" className="w-full max-w-md h-auto rounded-lg shadow-lg" />
             </div>
