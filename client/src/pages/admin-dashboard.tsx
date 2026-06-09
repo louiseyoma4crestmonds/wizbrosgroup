@@ -60,7 +60,7 @@ const categories = ["Electronics", "Clothing", "Home & Garden", "Sports", "Books
 function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: "NGN",
   }).format(cents / 100);
 }
 
@@ -235,16 +235,15 @@ function ProductForm({
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price (USD)</FormLabel>
+                <FormLabel>Price (NGN)</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                     <Input 
                       type="number"
                       step="0.01"
                       min="0"
                       placeholder="0.00" 
-                      className="pl-10"
+                      className="pl-4"
                       {...field} 
                       data-testid="input-product-price"
                     />
@@ -397,10 +396,9 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-10 h-10 rounded-md bg-primary flex items-center justify-center">
-                <Truck className="w-6 h-6 text-primary-foreground" />
+              <div className="w-[150px] h-[80px] flex items-center justify-center">
+                <img src="/logo.png" alt="Logo" />
               </div>
-              <span className="font-semibold text-xl">Wizbros Group</span>
             </div>
           </Link>
           <div className="flex items-center gap-4">

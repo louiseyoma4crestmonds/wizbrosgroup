@@ -5,24 +5,24 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
-import Delivery from "@/pages/delivery";
+import Logistics from "@/pages/logistics";
 import SendPackage from "@/pages/send-package";
 import Products from "@/pages/products";
 import AdminLogin from "@/pages/admin-login";
 import AdminDashboard from "@/pages/admin-dashboard";
-import { TrackPackage, Warehouse, Support } from "@/pages/placeholder";
+import AdminSetup from "@/pages/admin-setup";
+import ComingSoon from "@/pages/coming-soon";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Landing} />
-      <Route path="/delivery" component={Delivery} />
+      <Route path="/logistics" component={Logistics} />
       <Route path="/send-package" component={SendPackage} />
       <Route path="/products" component={Products} />
-      <Route path="/track" component={TrackPackage} />
-      <Route path="/warehouse" component={Warehouse} />
-      <Route path="/support" component={Support} />
+      <Route path="/coming-soon" component={ComingSoon} />
       <Route path="/admin/login" component={AdminLogin} />
+      <Route path="/admin/setup" component={AdminSetup} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route component={NotFound} />
     </Switch>

@@ -101,8 +101,22 @@ export async function registerRoutes(
         return res.status(401).json({ message: "Invalid credentials" });
       }
 
+      // Debug info: log safe metadata to help diagnose password mismatch issues.
+      try {
+        const stored = String(admin.password || "");
+        // don't log full secrets in production; this logs shape and lengths only
+        console.debug("[auth] login attempt:", {
+          username,
+          providedLength: typeof password === "string" ? password.length : null,
+          storedStartsWith: stored.slice(0,4),
+          storedLength: stored.length,
+        });
+      } catch (e) {
+        console.debug("[auth] login debug failed to read stored password");
+      }
+
       const validPassword = await bcrypt.compare(password, admin.password);
-      
+
       if (!validPassword) {
         return res.status(401).json({ message: "Invalid credentials" });
       }

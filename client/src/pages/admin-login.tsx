@@ -61,10 +61,9 @@ export default function AdminLogin() {
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center">
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-10 h-10 rounded-md bg-primary flex items-center justify-center">
-                <Truck className="w-6 h-6 text-primary-foreground" />
+              <div className="w-[150px] h-[80px] flex items-center justify-center">
+                <img src="/logo.png" alt="Logo" />
               </div>
-              <span className="font-semibold text-xl">Wizbros Group</span>
             </div>
           </Link>
         </div>
