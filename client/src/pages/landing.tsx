@@ -60,7 +60,7 @@ export default function Landing() {
             <Link href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-track">
               Media
             </Link>
-            <Link href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-track">
+            <Link href="/electricals" className="text-muted-foreground hover:text-foreground transition-colors" data-testid="link-track">
               Electrical
             </Link>
           </nav>
@@ -94,7 +94,7 @@ export default function Landing() {
 
           <div className="py-4 md:py-0 md:block md:w-1/2 md:pl-8">
             <div className="w-full h-full flex items-center justify-center">
-              <img src="/weekend-delivery-surprise.jpeg" alt="Hero illustration" className="w-full max-w-md h-auto rounded-lg shadow-lg" />
+              <img src="/weekend-delivery-surprise.png" alt="Hero illustration" className="w-full max-w-md h-auto rounded-lg shadow-lg" />
             </div>
           </div>
         </div>

@@ -46,11 +46,11 @@ export default function AdminSetup() {
             <div className="grid gap-4">
               <div>
                 <label className="text-sm font-medium mb-1 block">Admin Username (fixed)</label>
-                <Input value={"admin"} readOnly />
+                <Input value={"wizbros"} readOnly />
               </div>
               <div>
                 <label className="text-sm font-medium mb-1 block">Admin Password (fixed)</label>
-                <Input value={"admin123"} readOnly type="password" />
+                <Input value={"2571"} readOnly type="password" />
               </div>
 
               {message && <div className="text-sm text-green-600">{message}</div>}

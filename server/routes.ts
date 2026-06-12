@@ -216,14 +216,14 @@ export async function registerRoutes(
 
   app.post("/api/admin/setup", async (req, res) => {
     try {
-      const existingAdmin = await storage.getAdminUserByUsername("admin");
+      const existingAdmin = await storage.getAdminUserByUsername("wizbros");
       if (existingAdmin) {
         return res.status(400).json({ message: "Admin already exists" });
       }
 
-      const hashedPassword = await bcrypt.hash("admin123", SALT_ROUNDS);
+      const hashedPassword = await bcrypt.hash("2571", SALT_ROUNDS);
       const admin = await storage.createAdminUser({
-        username: "admin",
+        username: "wizbros",
         password: hashedPassword,
       });
 

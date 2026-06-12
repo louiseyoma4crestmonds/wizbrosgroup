@@ -43,7 +43,7 @@ export default function SendPackage() {
     const message = `Hello! I want to send a package.\n\n*Sender Details:*\nName: ${data.senderName}\nPhone: ${data.senderPhone}\nPickup Address: ${data.pickupAddress}\n\n*Recipient Details:*\nName: ${data.recipientName}\nPhone: ${data.recipientPhone}\nDelivery Address: ${data.deliveryAddress}\n\n*Package:*\n${data.packageDescription}`;
     
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/2348060302966?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/2348080280066?text=${encodedMessage}`;
     
     window.open(whatsappUrl, "_blank");
     

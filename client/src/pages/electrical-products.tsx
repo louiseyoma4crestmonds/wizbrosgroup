@@ -37,7 +37,7 @@ function ProductCard({ product }: { product: Product }) {
   const handleBuyNow = () => {
     const message = `Hello! I'm interested in ordering:\n\n*Product:* ${product.name}\n*Price:* ${formatPrice(product.price)}\n\nPlease let me know the next steps for payment and delivery.`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/2348060302966?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/2348080280066?text=${encodedMessage}`;
     window.open(whatsappUrl, "_blank");
   };
 

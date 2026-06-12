@@ -49,7 +49,7 @@ export default function ElectricalInstallation() {
     const message = `Hello! I want an electrical installation.\n\n*Sender Details:*\nName: ${data.senderName}\nPhone: ${data.senderPhone}\nAddress: ${data.pickupAddress}\n\n*Installation Type:*\n${data.installationType}`;
     
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/2348060302966?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/2348080280066?text=${encodedMessage}`;
     
     window.open(whatsappUrl, "_blank");
     
