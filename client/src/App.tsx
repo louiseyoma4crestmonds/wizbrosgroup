@@ -6,12 +6,17 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Landing from "@/pages/landing";
 import Logistics from "@/pages/logistics";
+import Electricals from "@/pages/electricals";
 import SendPackage from "@/pages/send-package";
 import Products from "@/pages/products";
 import AdminLogin from "@/pages/admin-login";
 import AdminDashboard from "@/pages/admin-dashboard";
+import AdminElectricalDashboard from "@/pages/admin-electrical-dashboard";
 import AdminSetup from "@/pages/admin-setup";
 import ComingSoon from "@/pages/coming-soon";
+import ElectricalInstallation from "@/pages/electrical-installations";
+import ElectricalProducts from "@/pages/electrical-products";
+import InstallationServices from "@/pages/installation-services";
 
 function Router() {
   return (
@@ -24,6 +29,11 @@ function Router() {
       <Route path="/admin/login" component={AdminLogin} />
       <Route path="/admin/setup" component={AdminSetup} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
+      <Route path="/admin/electrical-dashboard" component={AdminElectricalDashboard} />
+      <Route path="/electricals" component={Electricals} />
+      <Route path="/electrical-installations" component={ElectricalInstallation} />
+      <Route path="/installation-services" component={InstallationServices} />
+      <Route path="/electrical-products" component={ElectricalProducts} />
       <Route component={NotFound} />
     </Switch>
   );

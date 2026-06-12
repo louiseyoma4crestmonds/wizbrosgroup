@@ -17,6 +17,31 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 
+
+
+/** Electrical Products */
+
+export const electricalproducts = pgTable("electricalproducts", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  price: integer("price").notNull(),
+  imageUrl: text("image_url").notNull(),
+  category: text("category").notNull(),
+  inStock: boolean("in_stock").notNull().default(true),
+});
+
+export const insertElectricalProductSchema = createInsertSchema(electricalproducts).omit({
+  id: true,
+});
+
+export type InsertElectricalProduct = z.infer<typeof insertElectricalProductSchema>;
+export type ElectricalProduct = typeof electricalproducts.$inferSelect;
+
+/* End Electrical Products */
+
+
+
 export const products = pgTable("products", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),

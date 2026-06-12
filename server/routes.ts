@@ -1,7 +1,7 @@
 import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProductSchema, insertAdminUserSchema } from "@shared/schema";
+import { insertProductSchema, insertElectricalProductSchema,insertAdminUserSchema } from "@shared/schema";
 import bcrypt from "bcrypt";
 import session from "express-session";
 
@@ -24,6 +24,75 @@ export async function registerRoutes(
   httpServer: Server,
   app: Express
 ): Promise<Server> {
+
+
+
+
+  app.get("/api/electrical/products", async (req, res) => {
+    try {
+      const products = await storage.getElectricalProducts();
+      res.json(products);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch products" });
+    }
+  });
+
+  app.get("/api/electrical/products/:id", async (req, res) => {
+    try {
+      const product = await storage.getElectricalProduct(req.params.id);
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json(product);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch product" });
+    }
+  });
+
+  app.post("/api/electrical/products", requireAdmin, async (req, res) => {
+    try {
+      const parsed = insertElectricalProductSchema.safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ message: "Invalid product data", errors: parsed.error.errors });
+      }
+      const electricalproduct = await storage.createElectricalProduct(parsed.data);
+      res.status(201).json(electricalproduct);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to create product" });
+    }
+  });
+
+  app.patch("/api/electrical/products/:id", requireAdmin, async (req, res) => {
+    try {
+      const parsed = insertElectricalProductSchema.partial().safeParse(req.body);
+      if (!parsed.success) {
+        return res.status(400).json({ message: "Invalid product data", errors: parsed.error.errors });
+      }
+      const electricalproduct = await storage.updateElectricalProduct(req.params.id, parsed.data);
+      if (!electricalproduct) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json(electricalproduct);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update product" });
+    }
+  });
+
+  app.delete("/api/electrical/products/:id", requireAdmin, async (req, res) => {
+    try {
+      const deleted = await storage.deleteElectricalProduct(req.params.id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+      res.json({ message: "Product deleted" });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to delete product" });
+    }
+  });
+
+
+  /* My ownroutes ends here*/
+
   
   app.get("/api/products", async (req, res) => {
     try {

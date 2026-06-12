@@ -32,7 +32,7 @@ const features = [
     title: "Electrical",
     description: "Capture your moments with our professional videography services",
     icon: BellElectricIcon,
-    href: "/coming-soon",
+    href: "/electricals",
     color: "bg-purple-500/10 dark:bg-purple-500/20",
     iconColor: "text-purple-600 dark:text-purple-400",
   },

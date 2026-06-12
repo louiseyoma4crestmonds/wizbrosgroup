@@ -2,7 +2,8 @@ import {
   type User, type InsertUser, 
   type Product, type InsertProduct,
   type AdminUser, type InsertAdminUser,
-  users, products, adminUsers
+  users, products, adminUsers,
+  electricalproducts
 } from "@shared/schema";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
@@ -38,6 +39,38 @@ export class DatabaseStorage implements IStorage {
     const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
+
+  /* Electrical Products */
+
+  async getElectricalProducts(): Promise<Product[]> {
+    return await db.select().from(electricalproducts);
+  }
+
+  async getElectricalProduct(id: string): Promise<Product | undefined> {
+    const [product] = await db.select().from(electricalproducts).where(eq(products.id, id));
+    return product || undefined;
+  }
+
+  async createElectricalProduct(product: InsertProduct): Promise<Product> {
+    const [newProduct] = await db.insert(electricalproducts).values(product).returning();
+    return newProduct;
+  }
+
+  async updateElectricalProduct(id: string, productUpdate: Partial<InsertProduct>): Promise<Product | undefined> {
+    const [updated] = await db
+      .update(electricalproducts)
+      .set(productUpdate)
+      .where(eq(electricalproducts.id, id))
+      .returning();
+    return updated || undefined;
+  }
+
+  async deleteElectricalProduct(id: string): Promise<boolean> {
+    const result = await db.delete(electricalproducts).where(eq(electricalproducts.id, id)).returning();
+    return result.length > 0;
+  }
+
+  /* End Electrical Products */
 
   async getProducts(): Promise<Product[]> {
     return await db.select().from(products);

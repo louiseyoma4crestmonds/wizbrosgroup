@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { 
   LogOut, Plus, Pencil, Trash2, Package, 
-  CheckCircle, XCircle, ImageIcon
+  XCircle, ImageIcon,
+  CheckCircle
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -14,7 +15,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import type { Product, InsertProduct } from "@shared/schema";
+import type { ElectricalProduct, InsertElectricalProduct } from "@shared/schema";
 import { 
   Dialog,
   DialogContent,
@@ -55,7 +56,7 @@ const productFormSchema = z.object({
 
 type ProductFormValues = z.infer<typeof productFormSchema>;
 
-const categories = ["Clothing", "Home & Garden", "Sports", "Books", "Other"];
+const categories = ["Laptop", "Desktop", "Tablet", "Smartphone", "Television", "Sound System", "Accessories", "Other"];
 
 function formatPrice(cents: number): string {
   return new Intl.NumberFormat("en-US", {
@@ -83,36 +84,36 @@ function ProductTableSkeleton() {
 }
 
 function ProductForm({ 
-  product, 
+  electricalproduct, 
   onSuccess, 
   onCancel 
 }: { 
-  product?: Product; 
+  electricalproduct?: ElectricalProduct; 
   onSuccess: () => void;
   onCancel: () => void;
 }) {
   const { toast } = useToast();
-  const isEditing = !!product;
+  const isEditing = !!electricalproduct;
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(productFormSchema),
     defaultValues: {
-      name: product?.name || "",
-      description: product?.description || "",
-      price: product?.price ? product.price / 100 : 0,
-      imageUrl: product?.imageUrl || "",
-      category: product?.category || "",
-      inStock: product?.inStock ?? true,
+      name: electricalproduct?.name || "",
+      description: electricalproduct?.description || "",
+      price: electricalproduct?.price ? electricalproduct.price / 100 : 0,
+      imageUrl: electricalproduct?.imageUrl || "",
+      category: electricalproduct?.category || "",
+      inStock: electricalproduct?.inStock ?? true,
     },
   });
 
   const createMutation = useMutation({
-    mutationFn: async (data: InsertProduct) => {
-      const res = await apiRequest("POST", "/api/products", data);
+    mutationFn: async (data: InsertElectricalProduct) => {
+      const res = await apiRequest("POST", "/api/electrical/products", data);
       return res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/electrical/products"] });
       toast({
         title: "Product Created",
         description: "The product has been added successfully.",
@@ -129,12 +130,12 @@ function ProductForm({
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (data: InsertProduct) => {
-      const res = await apiRequest("PATCH", `/api/products/${product!.id}`, data);
+    mutationFn: async (data: InsertElectricalProduct) => {
+      const res = await apiRequest("PATCH", `/api/electrical/products/${electricalproduct!.id}`, data);
       return res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/products"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/electrical/products"] });
       toast({
         title: "Product Updated",
         description: "The product has been updated successfully.",
@@ -151,7 +152,7 @@ function ProductForm({
   });
 
   const onSubmit = (values: ProductFormValues) => {
-    const data: InsertProduct = {
+    const data: InsertElectricalProduct = {
       name: values.name,
       description: values.description,
       price: Math.round(values.price * 100),
@@ -330,11 +331,11 @@ export default function AdminDashboard() {
   const { toast } = useToast();
   const [, setLocation] = useLocation();
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [editingProduct, setEditingProduct] = useState<Product | undefined>();
-  const [deleteProduct, setDeleteProduct] = useState<Product | null>(null);
+  const [editingProduct, setEditingProduct] = useState<ElectricalProduct | undefined>();
+  const [deleteProduct, setDeleteProduct] = useState<ElectricalProduct | null>(null);
 
-  const { data: products, isLoading } = useQuery<Product[]>({
-    queryKey: ["/api/products"],
+  const { data: products, isLoading } = useQuery<ElectricalProduct[]>({
+    queryKey: ["/api/electrical/products"],
   });
 
   const { data: session } = useQuery({
@@ -380,8 +381,8 @@ export default function AdminDashboard() {
     setIsFormOpen(true);
   };
 
-  const handleOpenEdit = (product: Product) => {
-    setEditingProduct(product);
+  const handleOpenEdit = (electricalproduct: ElectricalProduct) => {
+    setEditingProduct(electricalproduct);
     setIsFormOpen(true);
   };
 
@@ -420,12 +421,12 @@ export default function AdminDashboard() {
       <main className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between gap-4 mb-8 flex-wrap">
           <div>
-            <h1 className="text-2xl font-bold" data-testid="text-dashboard-title">Product Management</h1>
+            <h1 className="text-2xl font-bold" data-testid="text-dashboard-title">Electrical Product Management</h1>
             <p className="text-muted-foreground">Add, edit, and manage your product catalog</p>
           </div>
           <Button onClick={handleOpenCreate} data-testid="button-add-product">
             <Plus className="w-4 h-4 mr-2" />
-            Add Product
+            Add Electrical Product
           </Button>
         </div>
 
@@ -563,7 +564,7 @@ export default function AdminDashboard() {
             </DialogDescription>
           </DialogHeader>
           <ProductForm 
-            product={editingProduct}
+            electricalproduct={editingProduct}
             onSuccess={handleFormSuccess}
             onCancel={() => setIsFormOpen(false)}
           />
